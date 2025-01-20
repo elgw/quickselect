@@ -187,10 +187,6 @@ partition(etype * restrict X, const size_t n,
     return;
 }
 
-
-#define max(x,y) (x>y ? x : y)
-#define min(x,y) (x<y ? x : y)
-
 static etype
 _quickselect(etype * restrict X, const size_t N, const size_t s,
              const int use_pb, etype ** restrict PB)
@@ -209,9 +205,9 @@ _quickselect(etype * restrict X, const size_t N, const size_t s,
     {
         if(s == 0)
         {
-            return min(X[0], X[1]);
+            return qs_min(X[0], X[1]);
         } else {
-            return max(X[0], X[1]);
+            return qs_max(X[0], X[1]);
         }
     }
 
@@ -219,13 +215,13 @@ _quickselect(etype * restrict X, const size_t N, const size_t s,
     {
         if(s == 0)
         {
-            return min(min(X[0], X[1]), X[2]);
+            return qs_min(qs_min(X[0], X[1]), X[2]);
         }
         if(s == 1)
         {
             return med3(X[0], X[1], X[2]);
         }
-        return max(max(X[0], X[1]), X[2]);
+        return qs_max(qs_max(X[0], X[1]), X[2]);
     }
 
     etype pivot;
