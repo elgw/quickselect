@@ -68,7 +68,12 @@ int main(int argc, char ** argv)
      s+= qselect_f64(X, N, (N-1)/2);
      s+= qselect_f64(X, N, N-1);
 #endif
-     assert(s == 0);
+     if(s != 0)
+     {
+         assert(s == 0);
+         printf("An unexpected result on line %d in %s\n", __LINE__, __FILE__);
+     }
+
 
     clock_gettime(CLOCK_REALTIME, &t0);
     for(size_t kk = 0 ; kk<N; kk++)
